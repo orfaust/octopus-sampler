@@ -1,0 +1,18 @@
+#N canvas 330 137 450 300 10;
+#X obj 62 17 inlet;
+#X obj 77 42 inlet;
+#X obj 62 168 +;
+#X obj 62 215 outlet;
+#X obj 92 71 loadbang;
+#X obj 77 144 *;
+#X obj 92 121 v gridSizeX;
+#X obj 92 92 del 10;
+#X obj 62 189 + 1;
+#X connect 0 0 2 0;
+#X connect 1 0 5 0;
+#X connect 2 0 8 0;
+#X connect 4 0 7 0;
+#X connect 5 0 2 1;
+#X connect 6 0 5 1;
+#X connect 7 0 6 0;
+#X connect 8 0 3 0;
