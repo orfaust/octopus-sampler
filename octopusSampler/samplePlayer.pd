@@ -1,7 +1,7 @@
 #N canvas 19 12 481 577 10;
 #X obj 11 5 cnv 15 450 550 empty empty SAMPLE_PLAYER 20 12 0 14 -192294
 -66577 0;
-#N canvas 11 19 845 610 record 0;
+#N canvas 11 19 845 610 record 1;
 #X msg 364 302 stop;
 #X obj 639 109 timer;
 #X floatatom 649 133 8 0 0 0 - - -, f 8;
@@ -101,7 +101,7 @@
 #X connect 22 0 4 0;
 #X restore 282 159 pd autoStop;
 #X obj 81 105 t f f;
-#N canvas 187 26 450 266 source 0;
+#N canvas 187 26 450 266 source 1;
 #X obj 165 211 outlet~;
 #X obj 42 23 adc~ 1;
 #X obj 166 23 r~ mixOut;
@@ -181,7 +181,22 @@
 #X connect 27 0 10 0;
 #X connect 28 0 11 0;
 #X connect 29 0 12 0;
-#X restore 298 70 pd sourceTracks;
+#X restore 302 32 pd sourceTracks;
+#X obj 302 75 *~;
+#N canvas 0 50 450 300 switch 0;
+#X obj 64 60 r \$0-sourceAll;
+#X obj 49 32 r \$0-sourceMic;
+#X obj 49 120 +;
+#X obj 64 91 t b f;
+#X obj 49 141 == 0;
+#X obj 49 183 outlet;
+#X connect 0 0 3 0;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 2 0;
+#X connect 3 1 2 1;
+#X connect 4 0 5 0;
+#X restore 317 53 pd switch;
 #X connect 1 0 4 0;
 #X connect 2 0 5 0;
 #X connect 3 0 5 1;
@@ -192,7 +207,9 @@
 #X connect 8 0 10 1;
 #X connect 9 0 0 0;
 #X connect 9 0 10 0;
-#X connect 11 0 9 0;
+#X connect 11 0 12 0;
+#X connect 12 0 9 0;
+#X connect 13 0 12 1;
 #X restore 66 42 pd source;
 #N canvas 161 147 450 367 autoPlay 0;
 #X obj 65 23 inlet;
@@ -252,6 +269,8 @@
 #X obj 364 328 t b b b;
 #X msg 364 423 0, f 2;
 #X obj 654 468 loadbang;
+#X msg 477 117 list /sourceTracks 0;
+#X obj 477 138 s toGUI;
 #X connect 0 0 6 0;
 #X connect 0 0 43 0;
 #X connect 1 0 2 0;
@@ -289,6 +308,7 @@
 #X connect 34 0 1 1;
 #X connect 36 0 14 0;
 #X connect 38 0 1 0;
+#X connect 38 0 46 0;
 #X connect 39 0 12 0;
 #X connect 40 0 24 0;
 #X connect 41 0 42 0;
@@ -298,6 +318,7 @@
 #X connect 43 2 16 0;
 #X connect 44 0 40 1;
 #X connect 45 0 3 0;
+#X connect 46 0 47 0;
 #X restore 48 247 pd record;
 #N canvas 161 165 984 344 status 0;
 #X obj 128 81 f \$1;
@@ -909,7 +930,7 @@
 #X obj 133 190 == 2;
 #X obj 133 5 inlet playback;
 #X obj 139 30 r sampleSelect;
-#X obj 133 211 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 133 211 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 117 283 inlet~ ramp;
 #X obj 105 310 snapshot~ 100;
