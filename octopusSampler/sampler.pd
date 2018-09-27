@@ -264,7 +264,7 @@
 #X msg 408 385 \; pd dsp 1;
 #X obj 344 238 loadbang;
 #X obj 344 305 s monitors;
-#X obj 344 283 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 344 283 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X msg 344 261 1;
 #X obj 414 238 loadbang;
@@ -315,7 +315,7 @@
 #X obj 62 342 route /timerPos /playPos /gridPulse /inputMonitor /sampleMonitor
 /masterMonitor, f 15;
 #X text 204 85 hann window salva click tra fine e inizio;
-#N canvas 63 27 674 608 main 0;
+#N canvas 63 27 627 608 main 1;
 #X obj 40 24 receive fromGUI;
 #X obj 40 45 list trim;
 #X obj 141 124 s \$0-recordSession;
@@ -544,24 +544,26 @@
 #X connect 21 0 20 0;
 #X connect 22 0 23 0;
 #X restore 50 104 pd gridSelect;
-#X obj 128 356 sel 1;
-#X msg 198 387 list /sourceAll 0;
+#X obj 123 356 sel 1;
+#X msg 193 387 list /sourceAll 0;
 #X obj 50 76 route /gridSelect /recordSession /sessionIndex;
 #X obj 52 270 s \$0-sourceAll;
 #X obj 40 356 sel 1;
-#X obj 198 501 s toGUI;
+#X obj 193 501 s toGUI;
 #X msg 40 447 list /sourceTracks 0;
-#X msg 128 417 list /sourceMic 0;
-#X text 179 288 source logic;
-#X obj 142 250 s \$0-sourceTracks;
-#X obj 380 456 s toGUI;
-#X obj 355 302 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X msg 123 417 list /sourceMic 0;
+#X text 184 355 source logic;
+#X obj 161 292 s \$0-sourceTracks;
+#X obj 409 496 s toGUI;
+#X obj 384 342 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 380 331 == 0;
-#X msg 380 366 list /sampleSpeed enable \$1;
-#X msg 355 389 list /pitchShifter enable \$1;
+#X obj 409 371 == 0;
+#X msg 409 406 list /sampleSpeed enable \$1;
+#X msg 384 429 list /pitchShifter enable \$1;
 #X obj 40 226 route /sourceAll /sourceTracks /speedPitch;
-#X msg 399 415 list /pitchReset enable \$1;
+#X msg 428 455 list /pitchReset enable \$1;
+#X obj 384 292 loadbang;
+#X msg 384 313 0;
 #X connect 0 0 1 0;
 #X connect 1 0 7 0;
 #X connect 1 0 20 0;
@@ -587,6 +589,8 @@
 #X connect 20 1 14 0;
 #X connect 20 2 16 0;
 #X connect 21 0 15 0;
+#X connect 22 0 23 0;
+#X connect 23 0 16 0;
 #X restore 32 116 pd main router;
 #X obj 32 229 samplePlayer 1;
 #X obj 32 269 samplePlayer 3;
